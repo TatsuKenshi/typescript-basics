@@ -48,6 +48,7 @@ console.log(miki2);
 
 class User3 {
   private _courseCount = 1;
+  protected _subscriptionTier: string = "basic";
 
   readonly city: string = "London";
   constructor(
@@ -82,3 +83,21 @@ console.log(miki3);
 
 // TS doesn't allow acccess to the deleteToken private method outside it's native class
 // console.log(miki3.deleteToken);
+
+class SubUser extends User3 {
+  isFamily: boolean = true;
+
+  // child class can't access private properties of its parent class
+  // that's why SubUser can't access/modify _courseCount
+  // however, SubUser can access and modify SubscriptionTier
+  // because it is a protected property
+  // accessible only within class and children classes
+
+  // changeCourseCount(){
+  //   this._courseCount = 4;
+  // }
+
+  changeSubscriptionTier() {
+    this._subscriptionTier = "Pro";
+  }
+}

@@ -40,6 +40,7 @@ class User3 {
         this.email = email;
         this.street = street;
         this._courseCount = 1;
+        this._subscriptionTier = "basic";
         this.city = "London";
     }
     get getAppleEmail() {
@@ -63,3 +64,20 @@ const miki3 = new User3("miki", "a@a.com", "Husova 12");
 console.log(miki3);
 // TS doesn't allow acccess to the deleteToken private method outside it's native class
 // console.log(miki3.deleteToken);
+class SubUser extends User3 {
+    constructor() {
+        super(...arguments);
+        this.isFamily = true;
+    }
+    // child class can't access private properties of its parent class
+    // that's why SubUser can't access/modify _courseCount
+    // however, SubUser can access and modify SubscriptionTier
+    // because it is a protected property
+    // accessible only within class and children classes
+    // changeCourseCount(){
+    //   this._courseCount = 4;
+    // }
+    changeSubscriptionTier() {
+        this._subscriptionTier = "Pro";
+    }
+}
